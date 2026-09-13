@@ -1,0 +1,697 @@
+<title>InvestEra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    color-scheme: light;
+    --surface-page: #ECECE9;
+    --surface-card: #FFFFFF;
+    --surface-sunken: #E2E2DD;
+    --surface-hover: #D8D8D2;
+    --ink-primary: #22262B;
+    --ink-secondary: #5B5F63;
+    --ink-muted: #8A8E90;
+    --border: #D7D7D1;
+    --accent: #0EA99B;
+    --accent-strong: #0B8478;
+    --accent-soft: #DFF3F0;
+    --accent-tint: #5FBDB0;
+    --accent-navy: #1F3A63;
+    --accent-gold: #B98514;
+    --accent-contrast: #FBFCF9;
+    --neutral-1: #9BA3AC;
+    --neutral-2: #B9A987;
+    --cat-1: #0EA394;
+    --cat-2: #B98514;
+    --cat-3: #59543F;
+    --cat-4: #2E5A9E;
+    --cat-5: #928A76;
+    --status-good: #0ca30c;
+    --status-warning: #fab219;
+    --status-critical: #d03b3b;
+    --shadow-card: 0 1px 2px rgba(27,33,24,.05), 0 10px 28px -14px rgba(27,33,24,.16);
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'IBM Plex Sans', -apple-system, "Segoe UI", sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --surface-page: #14161A;
+      --surface-card: #1B1E23;
+      --surface-sunken: #22262B;
+      --surface-hover: #2A2F35;
+      --ink-primary: #F0F1EF;
+      --ink-secondary: #BEC2C3;
+      --ink-muted: #82878A;
+      --border: #33383E;
+      --accent: #3FC7B7;
+      --accent-strong: #6EDCCF;
+      --accent-soft: #143733;
+      --accent-tint: #4FAE9F;
+      --accent-navy: #8CA7D6;
+      --accent-gold: #D9A73F;
+      --accent-contrast: #10160E;
+      --neutral-1: #545C64;
+      --neutral-2: #8C7A54;
+      --cat-1: #2A9E90;
+      --cat-2: #B5891F;
+      --cat-3: #726A56;
+      --cat-4: #547BB8;
+      --cat-5: #9A927D;
+      --shadow-card: 0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --surface-page: #14161A;
+    --surface-card: #1B1E23;
+    --surface-sunken: #22262B;
+    --surface-hover: #2A2F35;
+    --ink-primary: #F0F1EF;
+    --ink-secondary: #BEC2C3;
+    --ink-muted: #82878A;
+    --border: #33383E;
+    --accent: #3FC7B7;
+    --accent-strong: #6EDCCF;
+    --accent-soft: #143733;
+    --accent-tint: #4FAE9F;
+    --accent-navy: #8CA7D6;
+    --accent-gold: #D9A73F;
+    --accent-contrast: #10160E;
+    --neutral-1: #545C64;
+    --neutral-2: #8C7A54;
+    --cat-1: #2A9E90;
+    --cat-2: #B5891F;
+    --cat-3: #726A56;
+    --cat-4: #547BB8;
+    --cat-5: #9A927D;
+    --shadow-card: 0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.6);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ text-size-adjust: 100%; }
+  body{
+    margin:0;
+    background: var(--surface-page);
+    color: var(--ink-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    padding-inline: clamp(16px, 4vw, 40px);
+    padding-block: clamp(20px, 4vw, 44px);
+  }
+  h1,h2,h3{ font-family: var(--font-display); font-weight: 600; margin: 0; text-wrap: balance; }
+  .wrap{ max-width: 1180px; margin-inline: auto; display:flex; flex-direction:column; gap: clamp(20px, 3vw, 32px); }
+  .nums{ font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+  a{ color: var(--accent); }
+
+  /* ---------- header ---------- */
+  header.top{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+  }
+  .brand{ display:flex; flex-direction:column; gap:4px; }
+  .brand .mark{
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .brand .mark .invest{ color: var(--accent-navy); }
+  .brand .mark .era{ color: var(--accent); }
+  .brand .tagline{
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: .14em;
+  }
+  .period-badge{
+    display:flex; flex-direction:column; align-items:flex-end; gap:6px; text-align:right;
+  }
+  .period-badge .date{
+    font-family: var(--font-mono); font-weight:600; font-size:1rem;
+    background: var(--accent); color: #fff;
+    padding: 5px 12px; border-radius: 999px; border: 1px solid var(--accent);
+  }
+  .period-badge .sub{ font-size:.78rem; color: var(--ink-muted); }
+
+  /* ---------- KPI strip ---------- */
+  .kpi-grid{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px;
+    margin-top: 14px;
+  }
+  .kpi{
+    background: var(--surface-card); border:1px solid var(--border); border-radius:10px;
+    padding: 16px 18px; box-shadow: var(--shadow-card);
+    display:flex; flex-direction:column; gap:6px; position:relative; overflow:hidden;
+  }
+  .kpi .label{
+    font-size:.72rem; text-transform:uppercase; letter-spacing:.07em; color: var(--accent-gold); font-weight:700;
+  }
+  .kpi .value{ font-size: 1.65rem; font-weight:700; color: var(--accent); }
+  .kpi .sub{ font-size:.78rem; color: var(--ink-secondary); }
+  .kpi .flag{
+    position:absolute; top:14px; right:14px; width:9px; height:9px; border-radius:50%;
+  }
+  .kpi.warn .flag{ background: var(--status-warning); }
+  .kpi.good .flag{ background: var(--status-good); }
+
+  /* ---------- layout grid ---------- */
+  .main-grid{ display:grid; grid-template-columns: 1.55fr 1fr; gap: 18px; align-items:start; }
+  @media (max-width: 900px){ .main-grid{ grid-template-columns: 1fr; } }
+  .col{ display:flex; flex-direction:column; gap:18px; }
+
+  .card{
+    background: var(--surface-card); border:1px solid var(--border); border-radius:12px;
+    padding: 20px clamp(16px,2.4vw,24px); box-shadow: var(--shadow-card);
+  }
+  .card-head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+    margin-bottom:14px; padding-bottom:10px; border-bottom: 2px solid var(--border); flex-wrap:wrap;
+  }
+  .card-head h2{
+    font-size:1.15rem; font-weight:700; font-family:var(--font-body);
+    color: var(--accent); letter-spacing:.01em; text-transform:uppercase;
+  }
+  .card-head .meta{ font-size:.78rem; color:var(--ink-muted); }
+  .card-note{ font-size:.82rem; color:var(--ink-secondary); margin-top:2px; margin-bottom:14px; }
+
+  /* ---------- donut + legend ---------- */
+  .donut-layout{ display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+  .donut-svg-wrap{ position:relative; width:200px; height:200px; flex:0 0 auto; }
+  .donut-center{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; pointer-events:none;
+  }
+  .donut-center .t1{ font-size:.66rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-muted); }
+  .donut-center .t2{ font-family: var(--font-mono); font-weight:700; font-size:1.28rem; }
+  .legend{ flex:1 1 260px; display:flex; flex-direction:column; gap:2px; }
+  .legend-row{
+    display:grid; grid-template-columns: 12px 1fr auto auto; align-items:center; gap:10px;
+    padding: 8px 6px; border-radius:8px; cursor:pointer; border:1px solid transparent;
+  }
+  .legend-row:hover, .legend-row:focus-visible{ background: var(--surface-hover); }
+  .legend-row .swatch{ width:10px; height:10px; border-radius:3px; }
+  .legend-row .name{ font-weight:600; font-size:.9rem; }
+  .legend-row .pct{ font-size:.78rem; color:var(--ink-muted); font-family:var(--font-mono); }
+  .legend-row .amt{ font-family:var(--font-mono); font-weight:600; font-size:.88rem; text-align:right; }
+  details.holding{ border-top: 1px dashed var(--border); }
+  details.holding > summary{ list-style:none; }
+  details.holding > summary::-webkit-details-marker{ display:none; }
+  details.holding[open] > summary .legend-row{ background: var(--surface-sunken); }
+  .holding-body{ padding: 4px 6px 14px 32px; display:flex; flex-direction:column; gap:6px; }
+  .holding-item{ display:flex; justify-content:space-between; gap:12px; font-size:.85rem; }
+  .holding-item .h-name{ color: var(--ink-secondary); }
+  .holding-item .h-amt{ font-family:var(--font-mono); }
+  .holding-revnote{ font-size:.78rem; color:var(--ink-muted); margin-top:2px; border-top:1px solid var(--border); padding-top:6px; }
+
+  /* ---------- bar chart ---------- */
+  .barchart-svg{ width:100%; height:auto; overflow:visible; }
+  .bar-legend{ display:flex; gap:18px; font-size:.78rem; color:var(--ink-secondary); margin-top:10px; flex-wrap:wrap; }
+  .bar-legend .item{ display:flex; align-items:center; gap:6px; }
+  .bar-legend .swatch{ width:10px; height:10px; border-radius:2px; }
+  .bar-legend .swatch.q1{ opacity:.45; }
+
+  /* ---------- partner bars ---------- */
+  .partner-list{ display:flex; flex-direction:column; gap:9px; }
+  .partner-row{ display:grid; grid-template-columns: 108px 1fr 92px; align-items:center; gap:10px; }
+  .partner-row .pname{ font-size:.85rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .partner-track{ position:relative; height:16px; background:var(--surface-sunken); border-radius:5px; overflow:visible; }
+  .partner-fill{ position:absolute; inset:0 auto 0 0; height:100%; border-radius:5px; background:var(--accent); }
+  .partner-fill.below{ background: var(--status-warning); }
+  .partner-target-line{ position:absolute; top:-4px; bottom:-4px; width:2px; background:var(--ink-muted); opacity:.55; }
+  .partner-target-line::after{
+    content:'target'; position:absolute; top:-16px; left:50%; transform:translateX(-50%);
+    font-size:.62rem; color:var(--ink-muted); white-space:nowrap; text-transform:uppercase; letter-spacing:.04em;
+  }
+  .partner-row .pamt{ font-family:var(--font-mono); font-size:.82rem; text-align:right; }
+  .partner-foot{ font-size:.78rem; color:var(--ink-muted); margin-top:6px; }
+
+  /* ---------- balance sheet bars ---------- */
+  .bs-block{ display:flex; flex-direction:column; gap:16px; }
+  .bs-row{ display:flex; flex-direction:column; gap:6px; }
+  .bs-row .bs-label{ font-size:.76rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-muted); font-weight:600; }
+  .stackbar{ display:flex; height:34px; border-radius:7px; overflow:hidden; border:1px solid var(--border); }
+  .stackbar .seg{ height:100%; display:flex; align-items:center; justify-content:center; min-width:2px; position:relative; }
+  .stackbar .seg .seglabel{
+    font-family:var(--font-mono); font-size:.68rem; font-weight:600; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.25);
+    white-space:nowrap; padding-inline:4px;
+  }
+  .bs-total{ font-family:var(--font-mono); font-size:.8rem; color:var(--ink-secondary); display:flex; justify-content:space-between; }
+  .bs-key{ display:flex; flex-wrap:wrap; gap:10px 16px; font-size:.78rem; color:var(--ink-secondary); }
+  .bs-key .item{ display:flex; align-items:center; gap:6px; }
+  .bs-key .swatch{ width:9px; height:9px; border-radius:2px; }
+
+  /* ---------- table view (details) ---------- */
+  details.dtable{ margin-top:12px; }
+  details.dtable > summary{
+    cursor:pointer; font-size:.8rem; color: var(--accent); font-weight:600; list-style:none;
+  }
+  details.dtable > summary::-webkit-details-marker{ display:none; }
+  details.dtable > summary::before{ content:'▸ '; }
+  details.dtable[open] > summary::before{ content:'▾ '; }
+  table.datatable{ width:100%; border-collapse:collapse; margin-top:10px; font-size:.84rem; }
+  table.datatable th, table.datatable td{ padding:7px 8px; border-bottom:1px solid var(--border); text-align:right; }
+  table.datatable th:first-child, table.datatable td:first-child{ text-align:left; }
+  table.datatable th{ color:var(--ink-muted); font-weight:600; text-transform:uppercase; font-size:.68rem; letter-spacing:.05em; }
+  table.datatable td.amt, table.datatable th.amt{ font-family:var(--font-mono); }
+
+  /* ---------- footer chips ---------- */
+  .ledger-ref{
+    background: var(--surface-sunken); border:1px solid var(--border); border-radius:10px; padding:16px 18px;
+  }
+  .ledger-ref h3{ font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-muted); margin-bottom:10px; font-family:var(--font-body); font-weight:600;}
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-family:var(--font-mono); font-size:.74rem; background:var(--surface-card); border:1px solid var(--border);
+    padding:4px 9px; border-radius:6px; color:var(--ink-secondary);
+  }
+  .chip b{ color:var(--ink-primary); }
+
+  footer.pagefoot{ font-size:.78rem; color:var(--ink-muted); text-align:center; padding-top:8px; }
+
+  #tooltip{
+    position:fixed; pointer-events:none; z-index:50; background:var(--ink-primary); color:var(--surface-card);
+    font-size:.78rem; padding:7px 10px; border-radius:7px; max-width:240px; line-height:1.4;
+    opacity:0; transform: translateY(4px); transition: opacity .12s ease, transform .12s ease;
+    box-shadow: 0 8px 20px -6px rgba(0,0,0,.35);
+  }
+  #tooltip.show{ opacity:1; transform:translateY(0); }
+  #tooltip .tt-title{ font-weight:700; margin-bottom:2px; }
+  #tooltip .tt-row{ font-family:var(--font-mono); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+  .fadein{ animation: fadeUp .5s ease both; }
+  @keyframes fadeUp{ from{ opacity:0; transform: translateY(6px);} to{ opacity:1; transform:none; } }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="mark"><span class="invest">Invest</span><span class="era">Era</span></div>
+      <div class="tagline">Group · Partner capital &amp; portfolio report</div>
+    </div>
+    <div class="period-badge">
+      <span class="date">As of 30 Jun 2026</span>
+      <span class="sub">H1 2026 · Investera LLP</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>KPIs</h2>
+      <span class="meta">As of 30 Jun 2026 · H1 2026</span>
+    </div>
+    <div class="kpi-grid" id="kpiGrid"></div>
+  </section>
+
+  <div class="main-grid">
+    <div class="col">
+
+      <section class="card" id="cardInvestments">
+        <div class="card-head">
+          <h2>Investments by type</h2>
+          <span class="meta">Total invested capital</span>
+        </div>
+        <p class="card-note">Balances as of 30 Jun 2026, broken down to the named holding inside each portfolio account. Click a row to see what's underneath it.</p>
+        <div class="donut-layout">
+          <div class="donut-svg-wrap">
+            <svg viewBox="0 0 200 200" class="donut-svg" id="donutSvg" role="img" aria-label="Investments by type donut chart"></svg>
+            <div class="donut-center">
+              <span class="t1">Invested</span>
+              <span class="t2 nums" id="donutCenterValue">—</span>
+            </div>
+          </div>
+          <div class="legend" id="legendList"></div>
+        </div>
+      </section>
+
+      <section class="card" id="cardRevenue">
+        <div class="card-head">
+          <h2>Revenue by investment</h2>
+          <span class="meta">Q1 vs Q2 2026</span>
+        </div>
+        <p class="card-note">Income earned per category each quarter, sourced from GL income accounts 6300–6800.</p>
+        <svg viewBox="0 0 560 260" class="barchart-svg" id="revBarSvg" role="img" aria-label="Revenue by investment type, Q1 versus Q2 2026"></svg>
+        <div class="bar-legend">
+          <span class="item"><span class="swatch q1" style="background:var(--ink-primary)"></span>Q1 2026</span>
+          <span class="item"><span class="swatch" style="background:var(--ink-primary)"></span>Q2 2026</span>
+        </div>
+        <details class="dtable">
+          <summary>View data table</summary>
+          <table class="datatable" id="revTable">
+            <thead><tr><th>Category</th><th class="amt">Q1 2026</th><th class="amt">Q2 2026</th><th class="amt">H1 total</th><th class="amt">Yield on balance</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </details>
+      </section>
+
+    </div>
+
+    <div class="col">
+
+      <section class="card" id="cardPartners">
+        <div class="card-head">
+          <h2>Partners' capital</h2>
+          <span class="meta">11 partners</span>
+        </div>
+        <p class="card-note">Capital account balances vs. the latest ₹9,45,000 equalization target.</p>
+        <div class="partner-list" id="partnerList"></div>
+        <div class="partner-foot">Total partner capital <span class="nums" id="partnerTotal"></span> · Retained earnings (separate) <span class="nums" id="retainedEarn"></span></div>
+      </section>
+
+      <section class="card" id="cardBS">
+        <div class="card-head">
+          <h2>Balance sheet snapshot</h2>
+          <span class="meta">30 Jun 2026</span>
+        </div>
+        <div class="bs-block">
+          <div class="bs-row">
+            <span class="bs-label">Assets (gross investable + other current)</span>
+            <div class="stackbar" id="bsAssets"></div>
+            <div class="bs-total"><span>Gross</span><span class="nums" id="bsAssetsTotal"></span></div>
+          </div>
+          <div class="bs-row">
+            <span class="bs-label">Capital &amp; liabilities</span>
+            <div class="stackbar" id="bsEquity"></div>
+            <div class="bs-total"><span>Net (after cash used)</span><span class="nums" id="bsEquityTotal"></span></div>
+          </div>
+          <div class="bs-key" id="bsKey"></div>
+          <p class="card-note" style="margin:0;">Cash position is <strong class="nums">₹(2.98L)</strong> — deployed into investments during H1, so the equity &amp; liabilities side nets to Total Assets of <strong class="nums">₹1.33 Cr</strong>. Liabilities are the balancing residual (Assets − Capital − Retained Earnings); itemized liability detail lives in <span class="chip" style="padding:1px 6px;">TB 2025</span>.</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <section class="ledger-ref">
+    <h3>How this ledger is organized — one tab per account code</h3>
+    <div class="chip-row">
+      <span class="chip"><b>1001</b> Cash</span>
+      <span class="chip"><b>2001</b> Receivables</span>
+      <span class="chip"><b>3001–3508</b> Portfolio (investments)</span>
+      <span class="chip"><b>4001 / 4500</b> Fixed assets</span>
+      <span class="chip"><b>5001–5300</b> Liabilities</span>
+      <span class="chip"><b>6001–6011</b> Partner capital</span>
+      <span class="chip"><b>6100</b> Retained earnings</span>
+      <span class="chip"><b>6300–6800</b> Income, by investment</span>
+      <span class="chip"><b>7001–8100</b> Expenses</span>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    Compiled from <code>Investera FS 2026 Q2.xlsx</code> — Balance Sheet, Income Statement, TB 2025 and GL account tabs 1001–8100. All figures in Indian Rupees (INR).
+  </footer>
+
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  const CATS = [
+    { key:'cm', name:'Capital Market', color:'var(--cat-1)', hex:'#2E6C9E', balance:3027579.28, q1:89483.91, q2:107521.82,
+      holdings:[
+        {name:'India — listed NSE stocks', amount:2701949.05},
+        {name:'India — unlisted NSE stocks', amount:67206.00},
+        {name:'Global — ADNOC shares', amount:85688.00},
+        {name:'Global — Alphadata shares', amount:77493.83},
+        {name:'Global — 2PointZero shares', amount:54099.20},
+        {name:'Global — DANA shares', amount:41143.20}
+      ],
+      revNote:'Realised India trading gains ₹1.77L (GL 6300) + share dividends ₹0.20L, India &amp; Global (GL 6800). Zurich and Sarwa positions were fully exited in 2025.' },
+    { key:'pe', name:'Private Equity', color:'var(--cat-2)', hex:'#B8892F', balance:5750720.67, q1:343823.00, q2:847408.22,
+      holdings:[
+        {name:'Forum Fitness — Sharjah', amount:3347789.47},
+        {name:'Carry Fresh Super Market', amount:1273776.00},
+        {name:'Arrow Gym', amount:1026000.00},
+        {name:'Forum Fitness — Ajman (expansion)', amount:103155.20}
+      ],
+      revNote:'Forum Fitness ₹11.37L + Arrow Gym ₹0.55L (GL 6500). Forum balances have grown past cash invested because monthly profit is reinvested rather than paid out.' },
+    { key:'fi', name:'Fixed Income', color:'var(--cat-3)', hex:'#0E8F7C', balance:700000.00, q1:14416.00, q2:14647.00,
+      holdings:[ {name:'Rehbar — Shariah bond/Sukuk (3 tranches: 300K+200K+200K)', amount:700000.00} ],
+      revNote:'100% Rehbar profit distributions (GL 6400).' },
+    { key:'re', name:'Real Estate', color:'var(--cat-4)', hex:'#C1592E', balance:1104842.00, q1:0, q2:0,
+      holdings:[ {name:'Land investment (via Bazar broker, 4 installments)', amount:1104842.00} ],
+      revNote:'No revenue recorded in H1 2026. The original Villa Project and a gold-chain trade were both fully exited in prior years.' },
+    { key:'pr', name:'Projects', color:'var(--cat-5)', hex:'#8A4F9E', balance:2973958.02, q1:181273.25, q2:49472.00,
+      holdings:[
+        {name:'Government / construction project — Kerala (via Naseel)', amount:900000.00},
+        {name:'Qatar Project B2 — gold business (via Rebeeh)', amount:600779.52},
+        {name:'Qatar Project B1 (via Rebeeh)', amount:502059.77},
+        {name:'Diesel investment (net of tranches &amp; returns)', amount:420563.35},
+        {name:'Catering project — Jumeirah (via Fahad)', amount:322768.72},
+        {name:'AUH number plate (2 installments)', amount:227787.00}
+      ],
+      revNote:'Government/Construction ₹1.13L + Qatar ₹0.88L + Car Trade ₹0.30L (GL 6700). Car Trade itself was fully returned, so it carries no balance above.' }
+  ];
+
+  const PARTNERS = [
+    {name:'Abdul Gafoor', amount:946667.25},
+    {name:'Basar', amount:885184.76},
+    {name:'Fahad', amount:851145.84},
+    {name:'Jaseem', amount:850261.42},
+    {name:'Abdul Manasir', amount:828800.00},
+    {name:'Aslam', amount:815427.36},
+    {name:'Arif', amount:800030.40},
+    {name:'Rebeeh', amount:774791.31},
+    {name:'Shahir', amount:760000.00},
+    {name:'Shafeeq', amount:562178.53},
+    {name:'Riyas VP', amount:146138.00}
+  ];
+  const PARTNER_TARGET = 945000;
+
+  const TOTAL_ASSETS = 13269929.29;
+  const CASH = -298362.89;
+  const OTHER_CURRENT_ASSETS = 11192.20;
+  const TOTAL_PARTNER_CAPITAL = PARTNERS.reduce((s,p)=>s+p.amount,0);
+  const RETAINED_EARNINGS = 3322337.22;
+  const LIABILITIES = TOTAL_ASSETS - TOTAL_PARTNER_CAPITAL - RETAINED_EARNINGS;
+  const H1_REVENUE = 1648045.20;
+  const Q1_REVENUE = 628996.16;
+  const Q2_REVENUE = 1019049.04;
+  const TOTAL_INVESTED = CATS.reduce((s,c)=>s+c.balance,0);
+  const H1_YIELD = H1_REVENUE / TOTAL_INVESTED;
+
+  const fmtINR = n => new Intl.NumberFormat('en-IN', {maximumFractionDigits:0}).format(Math.round(n));
+  const fmtINRSigned = n => (n<0?'−₹':'₹') + fmtINR(Math.abs(n));
+  const fmtCr = n => {
+    const a = Math.abs(n), sign = n<0?'−':'';
+    if (a >= 1e7) return sign+'₹'+(a/1e7).toFixed(2)+' Cr';
+    if (a >= 1e5) return sign+'₹'+(a/1e5).toFixed(2)+' L';
+    return sign+'₹'+fmtINR(a);
+  };
+  const pct = (n,d) => (100*n/d).toFixed(1)+'%';
+
+  const tooltip = document.getElementById('tooltip');
+  function showTip(html, evt){
+    tooltip.innerHTML = html;
+    tooltip.classList.add('show');
+    moveTip(evt);
+  }
+  function moveTip(evt){
+    const pad = 14;
+    let x = evt.clientX + pad, y = evt.clientY + pad;
+    const r = tooltip.getBoundingClientRect();
+    if (x + r.width > window.innerWidth - 8) x = evt.clientX - r.width - pad;
+    if (y + r.height > window.innerHeight - 8) y = evt.clientY - r.height - pad;
+    tooltip.style.left = x+'px'; tooltip.style.top = y+'px';
+  }
+  function hideTip(){ tooltip.classList.remove('show'); }
+
+  /* ---------------- KPI strip ---------------- */
+  const kpiGrid = document.getElementById('kpiGrid');
+  const revGrowth = (Q2_REVENUE - Q1_REVENUE) / Q1_REVENUE;
+  const partnersAtTarget = PARTNERS.filter(p => p.amount >= PARTNER_TARGET).length;
+  const kpis = [
+    { label:'Total assets', value: fmtCr(TOTAL_ASSETS), sub: fmtINR(TOTAL_ASSETS)+' INR', cls:'' },
+    { label:'Total invested capital', value: fmtCr(TOTAL_INVESTED), sub:'across 5 portfolio categories', cls:'' },
+    { label:'H1 2026 revenue', value: fmtCr(H1_REVENUE), sub:'Q1 '+fmtCr(Q1_REVENUE)+' → Q2 '+fmtCr(Q2_REVENUE), cls:'good' },
+    { label:'Revenue growth, Q1 → Q2', value: (revGrowth>=0?'+':'')+(revGrowth*100).toFixed(1)+'%', sub:'quarter-on-quarter', cls:'good' },
+    { label:'H1 yield on invested capital', value: (H1_YIELD*100).toFixed(1)+'%', sub:'revenue ÷ invested balance', cls:'' },
+    { label:'Total partner capital', value: fmtCr(TOTAL_PARTNER_CAPITAL), sub:'11 partners · retained earnings '+fmtCr(RETAINED_EARNINGS)+' separate', cls:'' },
+    { label:'Partners at/above ₹9.45L target', value: partnersAtTarget+' of '+PARTNERS.length, sub:'latest capital target', cls: partnersAtTarget<PARTNERS.length?'warn':'good' },
+    { label:'Cash position', value: fmtCr(CASH), sub:'deployed into investments this period', cls:'warn' },
+  ];
+  kpiGrid.innerHTML = kpis.map(k => `
+    <div class="kpi ${k.cls} fadein">
+      ${k.cls?`<span class="flag"></span>`:''}
+      <span class="label">${k.label}</span>
+      <span class="value nums">${k.value}</span>
+      <span class="sub">${k.sub}</span>
+    </div>`).join('');
+
+  /* ---------------- Donut chart ---------------- */
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const donutSvg = document.getElementById('donutSvg');
+  const R = 80, CX = 100, CY = 100, STROKE = 26;
+  const CIRC = 2*Math.PI*R;
+  const GAP = 3; // px of arc gap between segments
+  let cum = 0;
+  CATS.forEach((c, i) => {
+    const frac = c.balance / TOTAL_INVESTED;
+    const len = Math.max(0, frac*CIRC - GAP);
+    const circle = document.createElementNS(svgNS,'circle');
+    circle.setAttribute('cx', CX); circle.setAttribute('cy', CY); circle.setAttribute('r', R);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', c.color);
+    circle.setAttribute('stroke-width', STROKE);
+    circle.setAttribute('stroke-linecap', 'round');
+    circle.setAttribute('stroke-dasharray', `${len} ${CIRC-len}`);
+    circle.setAttribute('stroke-dashoffset', -(cum + GAP/2));
+    circle.setAttribute('transform', `rotate(-90 ${CX} ${CY})`);
+    circle.style.cursor = 'pointer';
+    circle.addEventListener('mouseenter', e => {
+      donutSvg.querySelectorAll('circle').forEach(el=>el.style.opacity = el===circle?'1':'.35');
+      showTip(`<div class="tt-title">${c.name}</div><div class="tt-row">${fmtCr(c.balance)} · ${pct(c.balance,TOTAL_INVESTED)} of invested capital</div>`, e);
+    });
+    circle.addEventListener('mousemove', moveTip);
+    circle.addEventListener('mouseleave', () => {
+      donutSvg.querySelectorAll('circle').forEach(el=>el.style.opacity = '1');
+      hideTip();
+    });
+    donutSvg.appendChild(circle);
+    cum += frac*CIRC;
+  });
+  document.getElementById('donutCenterValue').textContent = fmtCr(TOTAL_INVESTED);
+
+  /* ---------------- Legend + holdings accordion ---------------- */
+  const legendList = document.getElementById('legendList');
+  legendList.innerHTML = CATS.map(c => `
+    <details class="holding">
+      <summary>
+        <div class="legend-row" tabindex="0">
+          <span class="swatch" style="background:${c.color}"></span>
+          <span class="name">${c.name}</span>
+          <span class="pct nums">${pct(c.balance, TOTAL_INVESTED)}</span>
+          <span class="amt nums">${fmtCr(c.balance)}</span>
+        </div>
+      </summary>
+      <div class="holding-body">
+        ${c.holdings.map(h => `<div class="holding-item"><span class="h-name">${h.name}</span><span class="h-amt nums">${fmtCr(h.amount)}</span></div>`).join('')}
+        <div class="holding-revnote">Revenue, H1 2026: ${c.revNote}</div>
+      </div>
+    </details>
+  `).join('');
+
+  /* ---------------- Revenue grouped bar chart ---------------- */
+  const revSvg = document.getElementById('revBarSvg');
+  const VW = 560, VH = 260;
+  const marginL = 44, marginR = 8, marginT = 10, marginB = 34;
+  const plotW = VW - marginL - marginR, plotH = VH - marginT - marginB;
+  const maxVal = Math.max(...CATS.map(c=>Math.max(c.q1,c.q2))) * 1.15;
+  const yScale = v => plotH - (v/maxVal)*plotH;
+  const groupW = plotW / CATS.length;
+  const barW = groupW * 0.28;
+  const gapBar = groupW * 0.06;
+
+  let svgParts = '';
+  // gridlines + y labels
+  const ticks = 4;
+  for (let t=0; t<=ticks; t++){
+    const val = maxVal * t/ticks;
+    const y = marginT + yScale(val);
+    svgParts += `<line x1="${marginL}" x2="${VW-marginR}" y1="${y}" y2="${y}" stroke="var(--border)" stroke-width="1"/>`;
+    svgParts += `<text x="${marginL-8}" y="${y+3}" text-anchor="end" font-family="var(--font-mono)" font-size="9" fill="var(--ink-muted)">${fmtCr(val)}</text>`;
+  }
+  CATS.forEach((c,i) => {
+    const gx = marginL + i*groupW;
+    const x1 = gx + groupW/2 - gapBar/2 - barW;
+    const x2 = gx + groupW/2 + gapBar/2;
+    const h1 = plotH - yScale(c.q1), h2 = plotH - yScale(c.q2);
+    const y1 = marginT + yScale(c.q1), y2 = marginT + yScale(c.q2);
+    svgParts += `<rect data-cat="${i}" data-q="1" x="${x1}" y="${y1}" width="${barW}" height="${Math.max(h1,0.5)}" rx="2.5" fill="${c.color}" opacity="0.45" style="cursor:pointer"/>`;
+    svgParts += `<rect data-cat="${i}" data-q="2" x="${x2}" y="${y2}" width="${barW}" height="${Math.max(h2,0.5)}" rx="2.5" fill="${c.color}" style="cursor:pointer"/>`;
+    if (c.q2 > 0){
+      svgParts += `<text x="${x2+barW/2}" y="${y2-5}" text-anchor="middle" font-family="var(--font-mono)" font-size="9" font-weight="600" fill="var(--ink-primary)">${fmtCr(c.q2)}</text>`;
+    }
+    svgParts += `<text x="${gx+groupW/2}" y="${VH-marginB+16}" text-anchor="middle" font-family="var(--font-body)" font-size="10" fill="var(--ink-secondary)">${c.name}</text>`;
+  });
+  svgParts += `<line x1="${marginL}" x2="${marginL}" y1="${marginT}" y2="${marginT+plotH}" stroke="var(--border)" stroke-width="1"/>`;
+  svgParts += `<line x1="${marginL}" x2="${VW-marginR}" y1="${marginT+plotH}" y2="${marginT+plotH}" stroke="var(--border)" stroke-width="1"/>`;
+  revSvg.innerHTML = svgParts;
+
+  revSvg.querySelectorAll('rect[data-cat]').forEach(rect => {
+    rect.addEventListener('mouseenter', e => {
+      const c = CATS[+rect.dataset.cat];
+      const q = rect.dataset.q === '1' ? 'Q1 2026' : 'Q2 2026';
+      const val = rect.dataset.q === '1' ? c.q1 : c.q2;
+      showTip(`<div class="tt-title">${c.name} · ${q}</div><div class="tt-row">${fmtCr(val)}</div>`, e);
+    });
+    rect.addEventListener('mousemove', moveTip);
+    rect.addEventListener('mouseleave', hideTip);
+  });
+
+  const revTableBody = document.querySelector('#revTable tbody');
+  revTableBody.innerHTML = CATS.map(c => {
+    const total = c.q1+c.q2;
+    const yield_ = c.balance>0 ? pct(total, c.balance) : '—';
+    return `<tr><td>${c.name}</td><td class="amt nums">${fmtINR(c.q1)}</td><td class="amt nums">${fmtINR(c.q2)}</td><td class="amt nums">${fmtINR(total)}</td><td class="amt nums">${yield_}</td></tr>`;
+  }).join('') + `<tr><td><strong>Total</strong></td><td class="amt nums"><strong>${fmtINR(Q1_REVENUE)}</strong></td><td class="amt nums"><strong>${fmtINR(Q2_REVENUE)}</strong></td><td class="amt nums"><strong>${fmtINR(H1_REVENUE)}</strong></td><td class="amt nums"><strong>${(H1_YIELD*100).toFixed(1)}%</strong></td></tr>`;
+
+  /* ---------------- Partner capital bars ---------------- */
+  const partnerList = document.getElementById('partnerList');
+  const maxPartner = Math.max(...PARTNERS.map(p=>p.amount), PARTNER_TARGET);
+  partnerList.innerHTML = PARTNERS.map(p => {
+    const w = (p.amount/maxPartner*100).toFixed(1);
+    const tW = (PARTNER_TARGET/maxPartner*100).toFixed(1);
+    const below = p.amount < PARTNER_TARGET;
+    return `
+    <div class="partner-row">
+      <span class="pname">${p.name}</span>
+      <div class="partner-track" data-name="${p.name}" data-amt="${p.amount}">
+        <div class="partner-fill ${below?'below':''}" style="width:${w}%"></div>
+        <div class="partner-target-line" style="left:${tW}%"></div>
+      </div>
+      <span class="pamt nums">${fmtCr(p.amount)}</span>
+    </div>`;
+  }).join('');
+  partnerList.querySelectorAll('.partner-track').forEach(track => {
+    track.addEventListener('mouseenter', e => {
+      const name = track.dataset.name, amt = +track.dataset.amt;
+      const diff = amt - PARTNER_TARGET;
+      showTip(`<div class="tt-title">${name}</div><div class="tt-row">${fmtCr(amt)} · ${diff>=0?'+':'−'}${fmtCr(Math.abs(diff))} vs ₹9.45L target</div>`, e);
+    });
+    track.addEventListener('mousemove', moveTip);
+    track.addEventListener('mouseleave', hideTip);
+  });
+  document.getElementById('partnerTotal').textContent = fmtCr(TOTAL_PARTNER_CAPITAL);
+  document.getElementById('retainedEarn').textContent = fmtCr(RETAINED_EARNINGS);
+
+  /* ---------------- Balance sheet stacked bars ---------------- */
+  const grossAssets = TOTAL_INVESTED + OTHER_CURRENT_ASSETS;
+  const assetSegs = [...CATS.map(c=>({name:c.name, amount:c.balance, color:c.color})), {name:'Other current assets', amount:OTHER_CURRENT_ASSETS, color:'var(--neutral-1)'}];
+  const equitySegs = [
+    {name:'Partner capital', amount:TOTAL_PARTNER_CAPITAL, color:'var(--accent)'},
+    {name:'Retained earnings', amount:RETAINED_EARNINGS, color:'var(--accent-tint)'},
+    {name:'Liabilities (derived)', amount:LIABILITIES, color:'var(--neutral-2)'}
+  ];
+  function renderStack(el, segs, scaleTotal){
+    el.innerHTML = segs.map(s => {
+      const w = (s.amount/scaleTotal*100).toFixed(2);
+      const showLabel = +w > 7;
+      return `<div class="seg" data-name="${s.name}" data-amt="${s.amount}" style="width:${w}%;background:${s.color}">${showLabel?`<span class="seglabel">${pct(s.amount,scaleTotal)}</span>`:''}</div>`;
+    }).join('');
+    el.querySelectorAll('.seg').forEach(seg => {
+      seg.addEventListener('mouseenter', e => showTip(`<div class="tt-title">${seg.dataset.name}</div><div class="tt-row">${fmtCr(+seg.dataset.amt)}</div>`, e));
+      seg.addEventListener('mousemove', moveTip);
+      seg.addEventListener('mouseleave', hideTip);
+    });
+  }
+  renderStack(document.getElementById('bsAssets'), assetSegs, grossAssets);
+  renderStack(document.getElementById('bsEquity'), equitySegs, grossAssets);
+  document.getElementById('bsAssetsTotal').textContent = fmtCr(grossAssets) + ' gross';
+  document.getElementById('bsEquityTotal').textContent = fmtCr(TOTAL_ASSETS);
+  document.getElementById('bsKey').innerHTML = [...assetSegs, ...equitySegs].map(s=>`<span class="item"><span class="swatch" style="background:${s.color}"></span>${s.name}</span>`).join('');
+
+})();
+</script>
