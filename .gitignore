@@ -1,0 +1,22 @@
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Excel/Office lock & temp files
+~$*.xls*
+~$*.doc*
+~$*.ppt*
+*.tmp
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Local env/secrets
+.env
+.env.*
+
+# Node
+node_modules/

@@ -116,14 +116,8 @@
     border-bottom: 1px solid var(--border);
     padding-bottom: 18px;
   }
-  .brand{ display:flex; flex-direction:column; gap:4px; }
-  .brand .mark{
-    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-  .brand .mark .invest{ color: var(--accent-navy); }
-  .brand .mark .era{ color: var(--accent); }
+  .brand{ display:flex; flex-direction:column; gap:6px; }
+  .brand .logo-badge img{ display:block; height:56px; width:auto; }
   .brand .tagline{
     font-family: var(--font-body);
     font-weight: 600;
@@ -141,6 +135,10 @@
     padding: 5px 12px; border-radius: 999px; border: 1px solid var(--accent);
   }
   .period-badge .sub{ font-size:.78rem; color: var(--ink-muted); }
+  .period-badge .confidential{
+    font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+    color: var(--status-critical);
+  }
 
   /* ---------- KPI strip ---------- */
   .kpi-grid{
@@ -212,12 +210,39 @@
   .holding-item .h-amt{ font-family:var(--font-mono); }
   .holding-revnote{ font-size:.78rem; color:var(--ink-muted); margin-top:2px; border-top:1px solid var(--border); padding-top:6px; }
 
-  /* ---------- bar chart ---------- */
-  .barchart-svg{ width:100%; height:auto; overflow:visible; }
-  .bar-legend{ display:flex; gap:18px; font-size:.78rem; color:var(--ink-secondary); margin-top:10px; flex-wrap:wrap; }
+  /* ---------- revenue-by-investment bars ---------- */
+  .bar-legend{ display:flex; gap:18px; font-size:.78rem; color:var(--ink-secondary); margin-bottom:14px; flex-wrap:wrap; }
   .bar-legend .item{ display:flex; align-items:center; gap:6px; }
   .bar-legend .swatch{ width:10px; height:10px; border-radius:2px; }
-  .bar-legend .swatch.q1{ opacity:.45; }
+  .bar-legend .swatch.q1{ opacity:.4; }
+
+  .revcat-list{ display:flex; flex-direction:column; gap:16px; }
+  .revcat-row{ display:flex; flex-direction:column; gap:6px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+  .revcat-row:last-child{ border-bottom:none; padding-bottom:0; }
+  .revcat-top{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .revcat-name{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:.95rem; }
+  .revcat-name .swatch{ width:11px; height:11px; border-radius:3px; flex:0 0 auto; }
+  .revcat-meta{ display:flex; align-items:baseline; gap:10px; }
+  .revcat-total{ font-family:var(--font-mono); font-weight:700; font-size:.95rem; }
+  .revcat-yield{ font-size:.72rem; color:var(--ink-muted); font-family:var(--font-mono); background:var(--surface-sunken); padding:2px 7px; border-radius:999px; }
+  .revcat-bars{ display:flex; flex-direction:column; gap:5px; }
+  .revcat-bar{ display:grid; grid-template-columns: 24px 1fr 78px; align-items:center; gap:8px; cursor:pointer; }
+  .revcat-bar .qlabel{ font-size:.64rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-muted); }
+  .revcat-track{ position:relative; height:13px; background:var(--surface-sunken); border-radius:6px; overflow:hidden; }
+  .revcat-fill{ position:absolute; inset:0 auto 0 0; height:100%; border-radius:6px; min-width:2px; transition:filter .12s ease; }
+  .revcat-fill.q1{ opacity:.42; }
+  .revcat-bar:hover .revcat-fill{ filter:brightness(1.08); }
+  .revcat-bar .qval{ font-family:var(--font-mono); font-size:.8rem; text-align:right; }
+
+  /* ---------- action items by owner ---------- */
+  .owner-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:12px; }
+  .owner-card{ background:var(--surface-sunken); border:1px solid var(--border); border-radius:10px; padding:12px 13px; }
+  .owner-card h3{
+    font-family:var(--font-body); font-size:.82rem; font-weight:700; color:var(--accent-navy);
+    margin:0 0 8px; padding-bottom:6px; border-bottom:1px solid var(--border);
+  }
+  .owner-card ul{ margin:0; padding-left:16px; display:flex; flex-direction:column; gap:5px; }
+  .owner-card li{ font-size:.78rem; color:var(--ink-secondary); line-height:1.4; }
 
   /* ---------- partner bars ---------- */
   .partner-list{ display:flex; flex-direction:column; gap:9px; }
@@ -248,6 +273,10 @@
   .bs-key{ display:flex; flex-wrap:wrap; gap:10px 16px; font-size:.78rem; color:var(--ink-secondary); }
   .bs-key .item{ display:flex; align-items:center; gap:6px; }
   .bs-key .swatch{ width:9px; height:9px; border-radius:2px; }
+
+  .bs-commentary ul{ margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px; }
+  .bs-commentary li{ font-size:.85rem; color:var(--ink-secondary); line-height:1.45; }
+  .bs-commentary li strong{ color:var(--ink-primary); }
 
   /* ---------- table view (details) ---------- */
   details.dtable{ margin-top:12px; }
@@ -298,12 +327,13 @@
 
   <header class="top">
     <div class="brand">
-      <div class="mark"><span class="invest">Invest</span><span class="era">Era</span></div>
-      <div class="tagline">Group · Partner capital &amp; portfolio report</div>
+      <span class="logo-badge"><img src="logo.png" alt="InvestEra Group"></span>
+      <div class="tagline">Partner capital &amp; portfolio report</div>
     </div>
     <div class="period-badge">
       <span class="date">As of 30 Jun 2026</span>
       <span class="sub">H1 2026 · Investera LLP</span>
+      <span class="confidential">Confidential — not to share outside the Investera Group</span>
     </div>
   </header>
 
@@ -323,7 +353,7 @@
           <h2>Investments by type</h2>
           <span class="meta">Total invested capital</span>
         </div>
-        <p class="card-note">Balances as of 30 Jun 2026, broken down to the named holding inside each portfolio account. Click a row to see what's underneath it.</p>
+        <p class="card-note">Balances as of 30 Jun 2026, broken down to the named holding inside each portfolio account. Sorted highest to lowest by balance. Click a row to see what's underneath it.</p>
         <div class="donut-layout">
           <div class="donut-svg-wrap">
             <svg viewBox="0 0 200 200" class="donut-svg" id="donutSvg" role="img" aria-label="Investments by type donut chart"></svg>
@@ -341,33 +371,96 @@
           <h2>Revenue by investment</h2>
           <span class="meta">Q1 vs Q2 2026</span>
         </div>
-        <p class="card-note">Income earned per category each quarter, sourced from GL income accounts 6300–6800.</p>
-        <svg viewBox="0 0 560 260" class="barchart-svg" id="revBarSvg" role="img" aria-label="Revenue by investment type, Q1 versus Q2 2026"></svg>
+        <p class="card-note">Income earned per category each quarter, sourced from GL income accounts 6300–6800. Sorted highest to lowest by H1 total. Yield badges are H1 revenue ÷ balance for the 6 months to 30 Jun 2026 — not annualized.</p>
         <div class="bar-legend">
           <span class="item"><span class="swatch q1" style="background:var(--ink-primary)"></span>Q1 2026</span>
           <span class="item"><span class="swatch" style="background:var(--ink-primary)"></span>Q2 2026</span>
         </div>
+        <div class="revcat-list" id="revCatList"></div>
         <details class="dtable">
           <summary>View data table</summary>
           <table class="datatable" id="revTable">
-            <thead><tr><th>Category</th><th class="amt">Q1 2026</th><th class="amt">Q2 2026</th><th class="amt">H1 total</th><th class="amt">Yield on balance</th></tr></thead>
+            <thead><tr><th>Category</th><th class="amt">Q1 2026</th><th class="amt">Q2 2026</th><th class="amt">H1 total</th><th class="amt">H1 yield (6-mo)</th></tr></thead>
             <tbody></tbody>
           </table>
         </details>
+      </section>
+
+      <section class="card" id="cardActionItems">
+        <div class="card-head">
+          <h2>Action items &amp; follow-ups</h2>
+          <span class="meta">By owner</span>
+        </div>
+        <div class="owner-grid">
+          <div class="owner-card">
+            <h3>Bazar</h3>
+            <ul>
+              <li>Diesel final settlement</li>
+              <li>Land sale and reporting</li>
+              <li>Shafeeq – share payment and restructuring</li>
+            </ul>
+          </div>
+          <div class="owner-card">
+            <h3>Rebeeh</h3>
+            <ul>
+              <li>Tax submission – progress &amp; completion status</li>
+              <li>New partner addition to Investera LLP</li>
+              <li>Qatar B1 and B2 – profit update</li>
+              <li>File completeness</li>
+              <li>Coordination with tax consultant</li>
+            </ul>
+          </div>
+          <div class="owner-card">
+            <h3>Manasir</h3>
+            <ul>
+              <li>Motilal/Zerodha – demat account status</li>
+              <li>Riyas VP refund</li>
+              <li>Fund target – AED 945K per person by 2026</li>
+              <li>Bank statement review and monthly cash flow reporting</li>
+            </ul>
+          </div>
+          <div class="owner-card">
+            <h3>Aslam</h3>
+            <ul>
+              <li>Arrow Gym &amp; Forum Fitness reconciliation and payments</li>
+              <li>Private Equity agreement – finalisation</li>
+              <li>Attendance – ongoing tracking</li>
+              <li>Shahir contribution review</li>
+              <li>Forum Fitness construction and expansion status</li>
+            </ul>
+          </div>
+          <div class="owner-card">
+            <h3>Fahad</h3>
+            <ul>
+              <li>Daily monitoring &amp; trade updates</li>
+              <li>Meeting agenda review</li>
+              <li>Quarterly reporting</li>
+              <li>Update on supermarkets, government project and catering</li>
+              <li>Cash flow management</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
     </div>
 
     <div class="col">
 
-      <section class="card" id="cardPartners">
+      <section class="card" id="cardCashflowNotes">
         <div class="card-head">
-          <h2>Partners' capital</h2>
-          <span class="meta">11 partners</span>
+          <h2>Key cashflow &amp; GL notes</h2>
+          <span class="meta">Latest quarter</span>
         </div>
-        <p class="card-note">Capital account balances vs. the latest ₹9,45,000 equalization target.</p>
-        <div class="partner-list" id="partnerList"></div>
-        <div class="partner-foot">Total partner capital <span class="nums" id="partnerTotal"></span> · Retained earnings (separate) <span class="nums" id="retainedEarn"></span></div>
+        <div class="bs-commentary">
+          <ul>
+            <li>Cash is running a small overdraft of <strong class="nums">₹2.98L</strong> because money kept moving out into new investments rather than sitting idle — a sign of active deployment, not a cash shortage.</li>
+            <li>Capital Market remains heavily India-weighted: Indian NSE stocks (listed + unlisted) make up <strong class="nums">₹27.7L</strong> of the <strong class="nums">₹30.3L</strong> balance, with the remaining <strong class="nums">₹2.58L</strong> spread across four global equity positions (ADNOC, Alphadata, 2PointZero, DANA).</li>
+            <li>Forum Fitness keeps compounding: its monthly profit is being reinvested back into the business instead of paid out, which is why its balance is now well above what was originally put in.</li>
+            <li>Car Trade (under Projects) was fully repaid in January 2026 and closed with a zero balance.</li>
+            <li>Real Estate earned no income this half — the land parcel bought is still awaiting a return event.</li>
+            <li>Rehbar (Fixed Income) paid out in both Q1 and Q2, with Q2 including a one-off equipment-rental amount on top of its usual profit share.</li>
+          </ul>
+        </div>
       </section>
 
       <section class="card" id="cardBS">
@@ -391,6 +484,16 @@
         </div>
       </section>
 
+      <section class="card" id="cardPartners">
+        <div class="card-head">
+          <h2>Partners' capital</h2>
+          <span class="meta">11 partners</span>
+        </div>
+        <p class="card-note">Capital account balances vs. the latest ₹9,45,000 equalization target.</p>
+        <div class="partner-list" id="partnerList"></div>
+        <div class="partner-foot">Total partner capital <span class="nums" id="partnerTotal"></span> · Retained earnings (separate) <span class="nums" id="retainedEarn"></span></div>
+      </section>
+
     </div>
   </div>
 
@@ -411,6 +514,7 @@
 
   <footer class="pagefoot">
     Compiled from <code>Investera FS 2026 Q2.xlsx</code> — Balance Sheet, Income Statement, TB 2025 and GL account tabs 1001–8100. All figures in Indian Rupees (INR).
+    <br><strong style="color:var(--status-critical);">Confidential — not to share outside the Investera Group.</strong>
   </footer>
 
 </div>
@@ -426,10 +530,7 @@
       holdings:[
         {name:'India — listed NSE stocks', amount:2701949.05},
         {name:'India — unlisted NSE stocks', amount:67206.00},
-        {name:'Global — ADNOC shares', amount:85688.00},
-        {name:'Global — Alphadata shares', amount:77493.83},
-        {name:'Global — 2PointZero shares', amount:54099.20},
-        {name:'Global — DANA shares', amount:41143.20}
+        {name:'Global Equity', amount:258424.23}
       ],
       revNote:'Realised India trading gains ₹1.77L (GL 6300) + share dividends ₹0.20L, India &amp; Global (GL 6800). Zurich and Sarwa positions were fully exited in 2025.' },
     { key:'pe', name:'Private Equity', color:'var(--cat-2)', hex:'#B8892F', balance:5750720.67, q1:343823.00, q2:847408.22,
@@ -437,23 +538,23 @@
         {name:'Forum Fitness — Sharjah', amount:3347789.47},
         {name:'Carry Fresh Super Market', amount:1273776.00},
         {name:'Arrow Gym', amount:1026000.00},
-        {name:'Forum Fitness — Ajman (expansion)', amount:103155.20}
+        {name:'Forum Fitness — Ajman', amount:103155.20}
       ],
       revNote:'Forum Fitness ₹11.37L + Arrow Gym ₹0.55L (GL 6500). Forum balances have grown past cash invested because monthly profit is reinvested rather than paid out.' },
     { key:'fi', name:'Fixed Income', color:'var(--cat-3)', hex:'#0E8F7C', balance:700000.00, q1:14416.00, q2:14647.00,
-      holdings:[ {name:'Rehbar — Shariah bond/Sukuk (3 tranches: 300K+200K+200K)', amount:700000.00} ],
+      holdings:[ {name:'Rehbar — Shariah Bond', amount:700000.00} ],
       revNote:'100% Rehbar profit distributions (GL 6400).' },
     { key:'re', name:'Real Estate', color:'var(--cat-4)', hex:'#C1592E', balance:1104842.00, q1:0, q2:0,
-      holdings:[ {name:'Land investment (via Bazar broker, 4 installments)', amount:1104842.00} ],
+      holdings:[ {name:'Land investment', amount:1104842.00} ],
       revNote:'No revenue recorded in H1 2026. The original Villa Project and a gold-chain trade were both fully exited in prior years.' },
     { key:'pr', name:'Projects', color:'var(--cat-5)', hex:'#8A4F9E', balance:2973958.02, q1:181273.25, q2:49472.00,
       holdings:[
-        {name:'Government / construction project — Kerala (via Naseel)', amount:900000.00},
-        {name:'Qatar Project B2 — gold business (via Rebeeh)', amount:600779.52},
-        {name:'Qatar Project B1 (via Rebeeh)', amount:502059.77},
-        {name:'Diesel investment (net of tranches &amp; returns)', amount:420563.35},
-        {name:'Catering project — Jumeirah (via Fahad)', amount:322768.72},
-        {name:'AUH number plate (2 installments)', amount:227787.00}
+        {name:'Government / construction project', amount:900000.00},
+        {name:'Qatar Project B2', amount:600779.52},
+        {name:'Qatar Project B1', amount:502059.77},
+        {name:'Diesel investment', amount:420563.35},
+        {name:'Catering project', amount:322768.72},
+        {name:'AUH number plate', amount:227787.00}
       ],
       revNote:'Government/Construction ₹1.13L + Qatar ₹0.88L + Car Trade ₹0.30L (GL 6700). Car Trade itself was fully returned, so it carries no balance above.' }
   ];
@@ -515,12 +616,18 @@
   const kpiGrid = document.getElementById('kpiGrid');
   const revGrowth = (Q2_REVENUE - Q1_REVENUE) / Q1_REVENUE;
   const partnersAtTarget = PARTNERS.filter(p => p.amount >= PARTNER_TARGET).length;
+  const catH1Totals = CATS.map(c => ({name:c.name, total:c.q1+c.q2}));
+  const topCat = catH1Totals.reduce((a,b) => b.total>a.total?b:a);
+  const topCatShare = topCat.total / H1_REVENUE;
+  const runRateYield = (Q2_REVENUE*2) / TOTAL_INVESTED;
   const kpis = [
     { label:'Total assets', value: fmtCr(TOTAL_ASSETS), sub: fmtINR(TOTAL_ASSETS)+' INR', cls:'' },
     { label:'Total invested capital', value: fmtCr(TOTAL_INVESTED), sub:'across 5 portfolio categories', cls:'' },
     { label:'H1 2026 revenue', value: fmtCr(H1_REVENUE), sub:'Q1 '+fmtCr(Q1_REVENUE)+' → Q2 '+fmtCr(Q2_REVENUE), cls:'good' },
     { label:'Revenue growth, Q1 → Q2', value: (revGrowth>=0?'+':'')+(revGrowth*100).toFixed(1)+'%', sub:'quarter-on-quarter', cls:'good' },
     { label:'H1 yield on invested capital', value: (H1_YIELD*100).toFixed(1)+'%', sub:'revenue ÷ invested balance', cls:'' },
+    { label:'Top revenue driver', value: topCat.name, sub:(topCatShare*100).toFixed(0)+'% of H1 revenue', cls:'good' },
+    { label:'Annualised run-rate yield', value: (runRateYield*100).toFixed(1)+'%', sub:'Q2 revenue × 2 ÷ invested balance', cls:'' },
     { label:'Total partner capital', value: fmtCr(TOTAL_PARTNER_CAPITAL), sub:'11 partners · retained earnings '+fmtCr(RETAINED_EARNINGS)+' separate', cls:'' },
     { label:'Partners at/above ₹9.45L target', value: partnersAtTarget+' of '+PARTNERS.length, sub:'latest capital target', cls: partnersAtTarget<PARTNERS.length?'warn':'good' },
     { label:'Cash position', value: fmtCr(CASH), sub:'deployed into investments this period', cls:'warn' },
@@ -539,8 +646,9 @@
   const R = 80, CX = 100, CY = 100, STROKE = 26;
   const CIRC = 2*Math.PI*R;
   const GAP = 3; // px of arc gap between segments
+  const CATS_BY_BALANCE = [...CATS].sort((a,b) => b.balance - a.balance);
   let cum = 0;
-  CATS.forEach((c, i) => {
+  CATS_BY_BALANCE.forEach((c, i) => {
     const frac = c.balance / TOTAL_INVESTED;
     const len = Math.max(0, frac*CIRC - GAP);
     const circle = document.createElementNS(svgNS,'circle');
@@ -569,7 +677,7 @@
 
   /* ---------------- Legend + holdings accordion ---------------- */
   const legendList = document.getElementById('legendList');
-  legendList.innerHTML = CATS.map(c => `
+  legendList.innerHTML = CATS_BY_BALANCE.map(c => `
     <details class="holding">
       <summary>
         <div class="legend-row" tabindex="0">
@@ -586,56 +694,53 @@
     </details>
   `).join('');
 
-  /* ---------------- Revenue grouped bar chart ---------------- */
-  const revSvg = document.getElementById('revBarSvg');
-  const VW = 560, VH = 260;
-  const marginL = 44, marginR = 8, marginT = 10, marginB = 34;
-  const plotW = VW - marginL - marginR, plotH = VH - marginT - marginB;
-  const maxVal = Math.max(...CATS.map(c=>Math.max(c.q1,c.q2))) * 1.15;
-  const yScale = v => plotH - (v/maxVal)*plotH;
-  const groupW = plotW / CATS.length;
-  const barW = groupW * 0.28;
-  const gapBar = groupW * 0.06;
+  /* ---------------- Revenue by investment — sorted horizontal bars ---------------- */
+  const revCatList = document.getElementById('revCatList');
+  const CATS_BY_REVENUE = [...CATS].sort((a,b) => (b.q1+b.q2) - (a.q1+a.q2));
+  const maxQ = Math.max(...CATS.map(c => Math.max(c.q1, c.q2))) || 1;
 
-  let svgParts = '';
-  // gridlines + y labels
-  const ticks = 4;
-  for (let t=0; t<=ticks; t++){
-    const val = maxVal * t/ticks;
-    const y = marginT + yScale(val);
-    svgParts += `<line x1="${marginL}" x2="${VW-marginR}" y1="${y}" y2="${y}" stroke="var(--border)" stroke-width="1"/>`;
-    svgParts += `<text x="${marginL-8}" y="${y+3}" text-anchor="end" font-family="var(--font-mono)" font-size="9" fill="var(--ink-muted)">${fmtCr(val)}</text>`;
-  }
-  CATS.forEach((c,i) => {
-    const gx = marginL + i*groupW;
-    const x1 = gx + groupW/2 - gapBar/2 - barW;
-    const x2 = gx + groupW/2 + gapBar/2;
-    const h1 = plotH - yScale(c.q1), h2 = plotH - yScale(c.q2);
-    const y1 = marginT + yScale(c.q1), y2 = marginT + yScale(c.q2);
-    svgParts += `<rect data-cat="${i}" data-q="1" x="${x1}" y="${y1}" width="${barW}" height="${Math.max(h1,0.5)}" rx="2.5" fill="${c.color}" opacity="0.45" style="cursor:pointer"/>`;
-    svgParts += `<rect data-cat="${i}" data-q="2" x="${x2}" y="${y2}" width="${barW}" height="${Math.max(h2,0.5)}" rx="2.5" fill="${c.color}" style="cursor:pointer"/>`;
-    if (c.q2 > 0){
-      svgParts += `<text x="${x2+barW/2}" y="${y2-5}" text-anchor="middle" font-family="var(--font-mono)" font-size="9" font-weight="600" fill="var(--ink-primary)">${fmtCr(c.q2)}</text>`;
-    }
-    svgParts += `<text x="${gx+groupW/2}" y="${VH-marginB+16}" text-anchor="middle" font-family="var(--font-body)" font-size="10" fill="var(--ink-secondary)">${c.name}</text>`;
-  });
-  svgParts += `<line x1="${marginL}" x2="${marginL}" y1="${marginT}" y2="${marginT+plotH}" stroke="var(--border)" stroke-width="1"/>`;
-  svgParts += `<line x1="${marginL}" x2="${VW-marginR}" y1="${marginT+plotH}" y2="${marginT+plotH}" stroke="var(--border)" stroke-width="1"/>`;
-  revSvg.innerHTML = svgParts;
+  revCatList.innerHTML = CATS_BY_REVENUE.map((c,i) => {
+    const total = c.q1 + c.q2;
+    const yield_ = c.balance>0 ? pct(total, c.balance) : '—';
+    const w1 = (c.q1/maxQ*100).toFixed(1);
+    const w2 = (c.q2/maxQ*100).toFixed(1);
+    return `
+    <div class="revcat-row fadein" style="animation-delay:${i*40}ms">
+      <div class="revcat-top">
+        <span class="revcat-name"><span class="swatch" style="background:${c.color}"></span>${c.name}</span>
+        <span class="revcat-meta">
+          <span class="revcat-yield">${yield_} H1 yield</span>
+          <span class="revcat-total nums">${fmtCr(total)}</span>
+        </span>
+      </div>
+      <div class="revcat-bars">
+        <div class="revcat-bar" data-cat="${CATS.indexOf(c)}" data-q="1">
+          <span class="qlabel">Q1</span>
+          <div class="revcat-track"><div class="revcat-fill q1" style="width:${w1}%;background:${c.color}"></div></div>
+          <span class="qval nums">${fmtCr(c.q1)}</span>
+        </div>
+        <div class="revcat-bar" data-cat="${CATS.indexOf(c)}" data-q="2">
+          <span class="qlabel">Q2</span>
+          <div class="revcat-track"><div class="revcat-fill q2" style="width:${w2}%;background:${c.color}"></div></div>
+          <span class="qval nums">${fmtCr(c.q2)}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 
-  revSvg.querySelectorAll('rect[data-cat]').forEach(rect => {
-    rect.addEventListener('mouseenter', e => {
-      const c = CATS[+rect.dataset.cat];
-      const q = rect.dataset.q === '1' ? 'Q1 2026' : 'Q2 2026';
-      const val = rect.dataset.q === '1' ? c.q1 : c.q2;
+  revCatList.querySelectorAll('.revcat-bar').forEach(bar => {
+    bar.addEventListener('mouseenter', e => {
+      const c = CATS[+bar.dataset.cat];
+      const q = bar.dataset.q === '1' ? 'Q1 2026' : 'Q2 2026';
+      const val = bar.dataset.q === '1' ? c.q1 : c.q2;
       showTip(`<div class="tt-title">${c.name} · ${q}</div><div class="tt-row">${fmtCr(val)}</div>`, e);
     });
-    rect.addEventListener('mousemove', moveTip);
-    rect.addEventListener('mouseleave', hideTip);
+    bar.addEventListener('mousemove', moveTip);
+    bar.addEventListener('mouseleave', hideTip);
   });
 
   const revTableBody = document.querySelector('#revTable tbody');
-  revTableBody.innerHTML = CATS.map(c => {
+  revTableBody.innerHTML = CATS_BY_REVENUE.map(c => {
     const total = c.q1+c.q2;
     const yield_ = c.balance>0 ? pct(total, c.balance) : '—';
     return `<tr><td>${c.name}</td><td class="amt nums">${fmtINR(c.q1)}</td><td class="amt nums">${fmtINR(c.q2)}</td><td class="amt nums">${fmtINR(total)}</td><td class="amt nums">${yield_}</td></tr>`;
