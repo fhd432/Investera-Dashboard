@@ -38,61 +38,6 @@
     --font-body: 'IBM Plex Sans', -apple-system, "Segoe UI", sans-serif;
     --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      color-scheme: dark;
-      --surface-page: #14161A;
-      --surface-card: #1B1E23;
-      --surface-sunken: #22262B;
-      --surface-hover: #2A2F35;
-      --ink-primary: #F0F1EF;
-      --ink-secondary: #BEC2C3;
-      --ink-muted: #82878A;
-      --border: #33383E;
-      --accent: #3FC7B7;
-      --accent-strong: #6EDCCF;
-      --accent-soft: #143733;
-      --accent-tint: #4FAE9F;
-      --accent-navy: #8CA7D6;
-      --accent-gold: #D9A73F;
-      --accent-contrast: #10160E;
-      --neutral-1: #545C64;
-      --neutral-2: #8C7A54;
-      --cat-1: #2A9E90;
-      --cat-2: #B5891F;
-      --cat-3: #726A56;
-      --cat-4: #547BB8;
-      --cat-5: #9A927D;
-      --shadow-card: 0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.6);
-    }
-  }
-  :root[data-theme="dark"]{
-    color-scheme: dark;
-    --surface-page: #14161A;
-    --surface-card: #1B1E23;
-    --surface-sunken: #22262B;
-    --surface-hover: #2A2F35;
-    --ink-primary: #F0F1EF;
-    --ink-secondary: #BEC2C3;
-    --ink-muted: #82878A;
-    --border: #33383E;
-    --accent: #3FC7B7;
-    --accent-strong: #6EDCCF;
-    --accent-soft: #143733;
-    --accent-tint: #4FAE9F;
-    --accent-navy: #8CA7D6;
-    --accent-gold: #D9A73F;
-    --accent-contrast: #10160E;
-    --neutral-1: #545C64;
-    --neutral-2: #8C7A54;
-    --cat-1: #2A9E90;
-    --cat-2: #B5891F;
-    --cat-3: #726A56;
-    --cat-4: #547BB8;
-    --cat-5: #9A927D;
-    --shadow-card: 0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.6);
-  }
-
   *{ box-sizing: border-box; }
   html{ text-size-adjust: 100%; }
   body{
@@ -117,7 +62,24 @@
     padding-bottom: 18px;
   }
   .brand{ display:flex; flex-direction:column; gap:6px; }
-  .brand .logo-badge img{ display:block; height:56px; width:auto; }
+  .brand .logo-badge{ display:flex; flex-direction:column; line-height:1; }
+  .brand .logo-badge .wordmark{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.9rem;
+    letter-spacing: -.01em;
+  }
+  .brand .logo-badge .wordmark .navy{ color: var(--accent-navy); }
+  .brand .logo-badge .wordmark .teal{ color: var(--accent); }
+  .brand .logo-badge .sub{
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
   .brand .tagline{
     font-family: var(--font-body);
     font-weight: 600;
@@ -327,7 +289,10 @@
 
   <header class="top">
     <div class="brand">
-      <span class="logo-badge"><img src="logo.png" alt="InvestEra Group"></span>
+      <span class="logo-badge">
+        <span class="wordmark"><span class="navy">Invest</span><span class="teal">Era</span></span>
+        <span class="sub">Group</span>
+      </span>
       <div class="tagline">Partner capital &amp; portfolio report</div>
     </div>
     <div class="period-badge">
