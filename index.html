@@ -62,24 +62,7 @@
     padding-bottom: 18px;
   }
   .brand{ display:flex; flex-direction:column; gap:6px; }
-  .brand .logo-badge{ display:flex; flex-direction:column; line-height:1; }
-  .brand .logo-badge .wordmark{
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.9rem;
-    letter-spacing: -.01em;
-  }
-  .brand .logo-badge .wordmark .navy{ color: var(--accent-navy); }
-  .brand .logo-badge .wordmark .teal{ color: var(--accent); }
-  .brand .logo-badge .sub{
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.7rem;
-    letter-spacing: .38em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-top: 4px;
-  }
+  .brand .logo-badge img{ display:block; height:56px; width:auto; }
   .brand .tagline{
     font-family: var(--font-body);
     font-weight: 600;
@@ -289,10 +272,7 @@
 
   <header class="top">
     <div class="brand">
-      <span class="logo-badge">
-        <span class="wordmark"><span class="navy">Invest</span><span class="teal">Era</span></span>
-        <span class="sub">Group</span>
-      </span>
+      <span class="logo-badge"><img src="logo.png" alt="InvestEra Group"></span>
       <div class="tagline">Partner capital &amp; portfolio report</div>
     </div>
     <div class="period-badge">
